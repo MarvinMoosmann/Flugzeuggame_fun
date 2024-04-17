@@ -43,14 +43,13 @@ public class Crusher extends SpielObjekt{
             }
         }
         if (input.isKeyDown(Input.KEY_W)) {
-               switch(rotation)  {
-                case (0) {
-                    this.setY(this.getY() - delta);
-                    this.setX(this.getX() - delta);
-                    if ((this.getY() < 0+this.getHeight()/2)) this.setY(this.getHeight()/2);
-                }
+                this.setY(this.getY() - delta);
+                this.setX(this.getX() - delta);
+            case (0) {
+                this.setY(this.getY() - delta);
+                this.setX(this.getX() - delta);
+                if ((this.getY() < 0+this.getHeight()/2)) this.setY(this.getHeight()/2);
             }
-
 
 
             this.setY(this.getY() - delta);
