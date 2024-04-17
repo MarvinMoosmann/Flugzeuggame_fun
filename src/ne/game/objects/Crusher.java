@@ -46,38 +46,58 @@ public class Crusher extends SpielObjekt{
                switch(rotation)  {
                    case 0:
                        this.setY(this.getY() - delta);
+                   case 1:
+                       this.setY(this.getY() - delta/2);
+                       this.setX(this.getX() + delta/2);
+                   case 2:
+                       this.setX(this.getX() + delta);
+                   case 3:
+                       this.setY(this.getY() + delta/2);
+                       this.setX(this.getX() + delta/2);
+                   case 4:
+                       this.setY(this.getY() + delta);
+                   case 5:
+                       this.setY(this.getY() + delta/2);
+                       this.setX(this.getX() - delta/2);
+                   case 6:
                        this.setX(this.getX() - delta);
-                   case 0:
-                       this.setY(this.getY() - delta);
-                       this.setX(this.getX() - delta);
-                   case 0:
-                       this.setY(this.getY() - delta);
-                       this.setX(this.getX() - delta);
-                   case 0:
-                       this.setY(this.getY() - delta);
-                       this.setX(this.getX() - delta);
-                   case 0:
-                       this.setY(this.getY() - delta);
-                       this.setX(this.getX() - delta);
-                   case 0:
-                       this.setY(this.getY() - delta);
-                       this.setX(this.getX() - delta);
-                   case 0:
-                       this.setY(this.getY() - delta);
-                       this.setX(this.getX() - delta);
-                   case 0:
-                       this.setY(this.getY() - delta);
-                       this.setX(this.getX() - delta);
+                   case 7:
+                       this.setY(this.getY() - delta/2);
+                       this.setX(this.getX() - delta/2);
                }
-            }
             if (this.getY() < 0+this.getHeight()/2) this.setY(0+this.getHeight()/2);
             if (this.getY() > 1080-this.getHeight()/2) this.setY(1080-this.getHeight()/2);
             if (this.getX() < 0+this.getWidth()/2) this.setX(0+this.getWidth()/2);
             if (this.getX() > 1920-this.getWidth()/2) this.setY(1920-this.getWidth()/2);
         }
+
         if (input.isKeyDown(Input.KEY_S)) {
-            this.setY(this.getY() + delta);
-            if ((this.getY() > (768-this.getHeight()/2))) this.setY(768-this.getHeight()/2);
+            switch(rotation)  {
+                case 0:
+                    this.setY(this.getY() - delta);
+                case 1:
+                    this.setY(this.getY() - delta/2);
+                    this.setX(this.getX() + delta/2);
+                case 2:
+                    this.setX(this.getX() + delta);
+                case 3:
+                    this.setY(this.getY() + delta/2);
+                    this.setX(this.getX() + delta/2);
+                case 4:
+                    this.setY(this.getY() + delta);
+                case 5:
+                    this.setY(this.getY() + delta/2);
+                    this.setX(this.getX() - delta/2);
+                case 6:
+                    this.setX(this.getX() - delta);
+                case 7:
+                    this.setY(this.getY() - delta/2);
+                    this.setX(this.getX() - delta/2);
+            }
+            if (this.getY() < 0+this.getHeight()/2) this.setY(0+this.getHeight()/2);
+            if (this.getY() > 1080-this.getHeight()/2) this.setY(1080-this.getHeight()/2);
+            if (this.getX() < 0+this.getWidth()/2) this.setX(0+this.getWidth()/2);
+            if (this.getX() > 1920-this.getWidth()/2) this.setY(1920-this.getWidth()/2);
         }
 
         shape.setCenterX(this.getX());
