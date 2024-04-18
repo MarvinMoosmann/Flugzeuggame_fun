@@ -38,6 +38,12 @@ public class MeinUfo extends SpielObjekt{
         shape.setCenterY(this.getY());
 
     }
+
+    @Override
+    public void update(int delta, int rotation) {
+
+    }
+
     public void setRandomPosition() {
         Random r =  new Random();
         int ry = 0;

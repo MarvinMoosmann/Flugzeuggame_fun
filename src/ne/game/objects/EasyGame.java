@@ -24,7 +24,7 @@ public class EasyGame extends BasicGame {
 
     public static void main(String[] args) throws SlickException {
         AppGameContainer container = new AppGameContainer(new EasyGame());
-        container.setDisplayMode(1920,1080 , false);
+        container.setDisplayMode(1920,1080 , true);
         //container.setClearEachFrame(false);
         container.setMinimumLogicUpdateInterval(25);
         container.setTargetFrameRate(144);
@@ -34,18 +34,18 @@ public class EasyGame extends BasicGame {
 
     @Override
     public void init(GameContainer container) throws SlickException {
-        animation = new Animation();
-        PackedSpriteSheet pss = new PackedSpriteSheet("res/animation/player1.def");
-        for (int i=1;i<=11;i++) {
-            animation.addFrame(pss.getSprite("flame_" + i + ".png"), 100);
-        }
+        //animation = new Animation();
+        //PackedSpriteSheet pss = new PackedSpriteSheet("res/animation/player1.def");
+        //for (int i=1;i<=11;i++) {
+        //    animation.addFrame(pss.getSprite("flame_" + i + ".png"), 100);
+        //}
             font = new AngelCodeFont("testdata/demo2.fnt","testdata/demo2_00.tga");
             background = new Image("assets/pics/background.png");
             mUfoList = new ArrayList<MeinUfo>();
-                for (int i = 1; i <= 1000; i++) {
-                    mUfoList add(new MeinUfo(100, 100, new Image("assets/pics/meinufo.png")));
+                for (int i = 1; i <= 1; i++) {
+                    mUfoList.add(new MeinUfo(100, 100, new Image("assets/pics/Player1.png")));
                 }
-            crusher = new Crusher(512,700,new Image("assets/pics/crusher.png"),container.getInput());
+            crusher = new Crusher(480,540,new Image("assets/pics/Player2.png"),container.getInput());
             music = new Music("testdata/testloop.ogg");
             sound = new Sound("testdata/burp.aif");
             music.loop();

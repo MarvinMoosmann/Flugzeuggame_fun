@@ -6,6 +6,11 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
 public class Crusher extends SpielObjekt{
+    @Override
+    public void update(int delta) {
+
+    }
+
     private Input input;
     private Rectangle shape;
     private float acceleration = 0.2f;
@@ -74,32 +79,31 @@ public class Crusher extends SpielObjekt{
         if (input.isKeyDown(Input.KEY_S)) {
             switch(rotation)  {
                 case 0:
-                    this.setY(this.getY() - delta);
-                case 1:
-                    this.setY(this.getY() - delta/2);
-                    this.setX(this.getX() + delta/2);
-                case 2:
-                    this.setX(this.getX() + delta);
-                case 3:
-                    this.setY(this.getY() + delta/2);
-                    this.setX(this.getX() + delta/2);
-                case 4:
                     this.setY(this.getY() + delta);
-                case 5:
+                case 1:
                     this.setY(this.getY() + delta/2);
                     this.setX(this.getX() - delta/2);
-                case 6:
+                case 2:
                     this.setX(this.getX() - delta);
-                case 7:
+                case 3:
                     this.setY(this.getY() - delta/2);
                     this.setX(this.getX() - delta/2);
+                case 4:
+                    this.setY(this.getY() - delta);
+                case 5:
+                    this.setY(this.getY() - delta/2);
+                    this.setX(this.getX() + delta/2);
+                case 6:
+                    this.setX(this.getX() + delta);
+                case 7:
+                    this.setY(this.getY() + delta/2);
+                    this.setX(this.getX() + delta/2);
             }
             if (this.getY() < 0+this.getHeight()/2) this.setY(0+this.getHeight()/2);
             if (this.getY() > 1080-this.getHeight()/2) this.setY(1080-this.getHeight()/2);
             if (this.getX() < 0+this.getWidth()/2) this.setX(0+this.getWidth()/2);
             if (this.getX() > 1920-this.getWidth()/2) this.setY(1920-this.getWidth()/2);
         }
-
         shape.setCenterX(this.getX());
         shape.setCenterY(this.getY());
     }
