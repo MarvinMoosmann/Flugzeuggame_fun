@@ -6,10 +6,6 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
 public class Crusher extends SpielObjekt{
-    @Override
-    public void update(int delta) {
-
-    }
 
     private Input input;
     private Rectangle shape;
@@ -28,6 +24,11 @@ public class Crusher extends SpielObjekt{
     @Override
     public Shape getShape() {
         return shape;
+    }
+
+    @Override
+    public void update(int delta) {
+        
     }
 
     @Override
