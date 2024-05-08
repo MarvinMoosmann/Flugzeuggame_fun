@@ -1,19 +1,17 @@
 package ne.game.objects;
 import org.newdawn.slick.*;
 
-import java.util.ArrayList;
-
 public class EasyGame extends BasicGame {
 
-    private MeinUfo MeinUFO;
+    private Player2 player2;
     private Image background;
-    private MeinUfo MeinUfo;
-    private Crusher crusher;
+    private Player2 Player2;
+    private Player1 player1;
     private Sound sound;
     private Music music;
     private int lautstärke = 0;
-    private int hit = 1;
-    private int miss = 1;
+    private int hitPlayer1 = 0;
+    private int hitPlayer2 = 0;
     private AngelCodeFont font;
     private Animation animation;
 
@@ -40,8 +38,8 @@ public class EasyGame extends BasicGame {
         //}
             font = new AngelCodeFont("testdata/demo2.fnt","testdata/demo2_00.tga");
             background = new Image("assets/pics/background.png");
-            MeinUfo = new MeinUfo(1440, 540, new Image("assets/pics/Player1.png"),container.getInput());
-            crusher = new Crusher(480,540,new Image("assets/pics/Player2.png"),container.getInput());
+            Player2 = new Player2(1440, 540, new Image("assets/pics/Player1.png"),container.getInput());
+            player1 = new Player1(480,540,new Image("assets/pics/Player2.png"),container.getInput());
             music = new Music("testdata/testloop.ogg");
             sound = new Sound("testdata/burp.aif");
             music.loop();
@@ -65,19 +63,17 @@ public class EasyGame extends BasicGame {
             if (lautstärke < 1) lautstärke = 0;
             music.setVolume(lautstärke / 10f);
         }
-
-
-        MeinUfo.update(delta);
-        crusher.update(delta);
+        Player2.update(delta);
+        player1.update(delta);
     }
 
     @Override
     public void render(GameContainer container, Graphics g) throws SlickException {
         background.draw();
-        MeinUfo.draw(g);
-        crusher.draw(g);
-        font.drawString(8, 25, "Hit "+hit, Color.black);
-        font.drawString(7, 50, "Miss "+miss, Color.red);
+        Player2.draw(g);
+        player1.draw(g);
+        font.drawString(8, 25, "Player 1: "+ hitPlayer1, Color.black);
+        font.drawString(8, 50, "Player 2: "+ hitPlayer2, Color.black);
     }
 }
 

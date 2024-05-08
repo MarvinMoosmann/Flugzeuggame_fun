@@ -5,13 +5,13 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
-public class Crusher extends SpielObjekt{
+public class Player2 extends SpielObjekt{
 
     private Input input;
     private Rectangle shape;
     private int rotation =0;
     private float acceleration = 0.2f;
-    public Crusher(int x, int y, Image image, Input input) {
+    public Player2(int x, int y, Image image, Input input) {
         super(x, y, image);
         this.input = input;
         shape = new Rectangle(x,y,image.getWidth(),image.getHeight());
@@ -32,7 +32,7 @@ public class Crusher extends SpielObjekt{
     @Override
     public void update(int delta) {
 
-        if (input.isKeyPressed(Input.KEY_D)) {
+        if (input.isKeyPressed(Input.KEY_RIGHT)) {
             if (rotation<=7) {
                 rotation++;
                 this.getImage().setRotation(this.getImage().getRotation()+45f);
@@ -40,7 +40,7 @@ public class Crusher extends SpielObjekt{
                 rotation = 0;
             }
         }
-        if (input.isKeyPressed(Input.KEY_A)) {
+        if (input.isKeyPressed(Input.KEY_LEFT)) {
             if (rotation>=0) {
                 rotation--;
                 this.getImage().setRotation(this.getImage().getRotation()-45f);
@@ -49,11 +49,11 @@ public class Crusher extends SpielObjekt{
             }
 
         }
-        if (input.isKeyDown(Input.KEY_W)) {
+        if (input.isKeyDown(Input.KEY_UP)) {
             setRotation(rotation,true,delta);
         }
 
-        if (input.isKeyDown(Input.KEY_S)) {
+        if (input.isKeyDown(Input.KEY_DOWN)) {
             setRotation(rotation,false,delta);
         }
         shape.setCenterX(this.getX());
