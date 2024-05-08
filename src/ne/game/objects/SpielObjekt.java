@@ -63,5 +63,4 @@ public abstract class SpielObjekt {
         this.image = image;
     }
 
-    public abstract void update(int delta, int rotation);
 }

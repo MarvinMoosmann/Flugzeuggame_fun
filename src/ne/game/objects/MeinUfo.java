@@ -39,10 +39,6 @@ public class MeinUfo extends SpielObjekt{
 
     }
 
-    @Override
-    public void update(int delta, int rotation) {
-
-    }
 
     public void setRandomPosition() {
         Random r =  new Random();
