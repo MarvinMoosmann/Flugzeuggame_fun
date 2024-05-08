@@ -63,6 +63,15 @@ public class EasyGame extends BasicGame {
             if (lautstärke < 1) lautstärke = 0;
             music.setVolume(lautstärke / 10f);
         }
+
+        for (Player1 u:Player1){
+            if(player1.intersects(u.getShape())){
+                player1.setY(540);
+                player1.setX(480);
+                player2.setY(540);
+                player2.setX(1440);
+            }
+        }
         Player2.update(delta);
         player1.update(delta);
     }
@@ -72,8 +81,8 @@ public class EasyGame extends BasicGame {
         background.draw();
         Player2.draw(g);
         player1.draw(g);
-        font.drawString(8, 25, "Player 1: "+ hitPlayer1, Color.black);
-        font.drawString(8, 50, "Player 2: "+ hitPlayer2, Color.black);
+        font.drawString(8, 25, "Player 1: "+ hitPlayer1, Color.red);
+        font.drawString(8, 50, "Player 2: "+ hitPlayer2, Color.red);
     }
 }
 
