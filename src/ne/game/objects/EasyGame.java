@@ -5,10 +5,9 @@ import java.util.ArrayList;
 
 public class EasyGame extends BasicGame {
 
-    private ArrayList<MeinUfo> mUfoList;
-
+    private MeinUfo MeinUFO;
     private Image background;
-
+    private MeinUfo MeinUfo;
     private Crusher crusher;
     private Sound sound;
     private Music music;
@@ -41,10 +40,7 @@ public class EasyGame extends BasicGame {
         //}
             font = new AngelCodeFont("testdata/demo2.fnt","testdata/demo2_00.tga");
             background = new Image("assets/pics/background.png");
-            mUfoList = new ArrayList<MeinUfo>();
-                for (int i = 1; i <= 1; i++) {
-                    mUfoList.add(new MeinUfo(100, 100, new Image("assets/pics/Player1.png")));
-                }
+            MeinUfo = new MeinUfo(1440, 540, new Image("assets/pics/Player1.png"),container.getInput());
             crusher = new Crusher(480,540,new Image("assets/pics/Player2.png"),container.getInput());
             music = new Music("testdata/testloop.ogg");
             sound = new Sound("testdata/burp.aif");
@@ -70,28 +66,15 @@ public class EasyGame extends BasicGame {
             music.setVolume(lautstärke / 10f);
         }
 
-        for (MeinUfo u : mUfoList) {
-            if (crusher.intersects(u.getShape())) {
-                System.out.println("collide");
-                sound.play();
-                u.setRandomPosition();
-                hit++;
-            }
-            if (u.getY() > 768) {
-                miss++;
-                u.setRandomPosition();
-            }
-            u.update(delta);
-        }
+
+        MeinUfo.update(delta);
         crusher.update(delta);
     }
 
     @Override
     public void render(GameContainer container, Graphics g) throws SlickException {
         background.draw();
-        for (MeinUfo u : mUfoList) {
-            u.draw(g);
-        }
+        MeinUfo.draw(g);
         crusher.draw(g);
         font.drawString(8, 25, "Hit "+hit, Color.black);
         font.drawString(7, 50, "Miss "+miss, Color.red);

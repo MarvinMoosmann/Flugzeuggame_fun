@@ -95,7 +95,7 @@ public class Crusher extends SpielObjekt{
         if (this.getY() < 0+this.getHeight()/2) this.setY(0+this.getHeight()/2);
         if (this.getY() > 1080-this.getHeight()/2) this.setY(1080-this.getHeight()/2);
         if (this.getX() < 0+this.getWidth()/2) this.setX(0+this.getWidth()/2);
-        if (this.getX() > 1920-this.getWidth()/2) this.setY(1920-this.getWidth()/2);
+        if (this.getX() > 1920-this.getWidth()/2) this.setX(1920-this.getWidth()/2);
     }
 
     public boolean intersects(Shape shape) {
