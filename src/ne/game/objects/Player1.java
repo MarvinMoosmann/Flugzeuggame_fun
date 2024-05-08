@@ -60,6 +60,7 @@ public class Player1 extends SpielObjekt{
         shape.setCenterY(this.getY());
     }
     private void setRotation(int rotation,boolean vor, int delta){
+        //es stoppt die ganze zit, des noch ussar bringa bitte bei player1 and 2
         int ivor = 1;
         if (!vor) ivor = -1;
         switch(rotation)  {
