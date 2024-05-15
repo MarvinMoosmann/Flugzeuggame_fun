@@ -24,7 +24,7 @@ public class EasyGame extends BasicGame {
         container.setDisplayMode(1920,1080 , true);
         //container.setClearEachFrame(false);
         container.setMinimumLogicUpdateInterval(25);
-        container.setTargetFrameRate(144);
+        container.setTargetFrameRate(60);
         container.setShowFPS(true);
         container.start();
     }
