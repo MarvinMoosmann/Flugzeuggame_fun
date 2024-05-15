@@ -15,6 +15,8 @@ public class EasyGame extends BasicGame {
     private Animation animation;
     private boolean planecolission = false;
 
+    private int timer =0;
+
     public EasyGame() {
         super("EasyGame");
     }
@@ -52,8 +54,11 @@ public class EasyGame extends BasicGame {
 
         if (planecolission){
             //animation + pause hier einfügen
-
-            planecolission=false;
+            timer += delta;
+            if (timer>=5000){
+                planecolission=false;
+                timer=0;
+            }
         } else {
             if (input.isKeyPressed(Input.KEY_ESCAPE)) {
                 container.exit();
