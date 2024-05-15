@@ -2,10 +2,8 @@ package ne.game.objects;
 import org.newdawn.slick.*;
 
 public class EasyGame extends BasicGame {
-
-    private Player2 player2;
     private Image background;
-    private Player2 Player2;
+    private Player2 player2;
     private Player1 player1;
     private Sound sound;
     private Music music;
@@ -14,6 +12,7 @@ public class EasyGame extends BasicGame {
     private int hitPlayer2 = 0;
     private AngelCodeFont font;
     private Animation animation;
+    private boolean finished = false;
 
     public EasyGame() {
         super("EasyGame");
@@ -38,7 +37,7 @@ public class EasyGame extends BasicGame {
         //}
             font = new AngelCodeFont("testdata/demo2.fnt","testdata/demo2_00.tga");
             background = new Image("assets/pics/background.png");
-            Player2 = new Player2(1440, 540, new Image("assets/pics/Player1.png"),container.getInput());
+            player2 = new Player2(1440, 540, new Image("assets/pics/Player1.png"),container.getInput());
             player1 = new Player1(480,540,new Image("assets/pics/Player2.png"),container.getInput());
             music = new Music("testdata/testloop.ogg");
             sound = new Sound("testdata/burp.aif");
@@ -50,27 +49,39 @@ public class EasyGame extends BasicGame {
     public void update(GameContainer container, int delta) throws SlickException {
         Input input = container.getInput();
 
-        if (input.isKeyPressed(Input.KEY_ESCAPE)) {
-            container.exit();
+        if (finished){
+            // Video anzeigen und warten bis fertig
+
+            finished =false;
+        } else {
+
+            if (input.isKeyPressed(Input.KEY_ESCAPE)) {
+                container.exit();
+            }
+            if (input.isKeyPressed(Input.KEY_UP)){
+                lautstärke = lautstärke +1;
+                if (lautstärke >=10) lautstärke = 10;
+                music.setVolume(lautstärke/10f);
+            }
+            if (input.isKeyPressed(Input.KEY_DOWN)) {
+                lautstärke = lautstärke - 1;
+                if (lautstärke < 1) lautstärke = 0;
+                music.setVolume(lautstärke / 10f);
+            }
+            player2.update(delta);
+            player1.update(delta);
+            if (player1.intersects(player2.getShape())){
+                System.out.println("Kollision juhe");
+                finished = true;
+            }
         }
-        if (input.isKeyPressed(Input.KEY_UP)){
-            lautstärke = lautstärke +1;
-            if (lautstärke >=10) lautstärke = 10;
-            music.setVolume(lautstärke/10f);
-        }
-        if (input.isKeyPressed(Input.KEY_DOWN)) {
-            lautstärke = lautstärke - 1;
-            if (lautstärke < 1) lautstärke = 0;
-            music.setVolume(lautstärke / 10f);
-        }
-        Player2.update(delta);
-        player1.update(delta);
+
     }
 
     @Override
     public void render(GameContainer container, Graphics g) throws SlickException {
         background.draw();
-        Player2.draw(g);
+        player2.draw(g);
         player1.draw(g);
         font.drawString(8, 25, "Player 1: "+ hitPlayer1, Color.black);
         font.drawString(8, 50, "Player 2: "+ hitPlayer2, Color.black);
