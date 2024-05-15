@@ -23,7 +23,7 @@ public class EasyGame extends BasicGame {
         container.setDisplayMode(1920,1080 , true);
         //container.setClearEachFrame(false);
         container.setMinimumLogicUpdateInterval(25);
-        container.setTargetFrameRate(144);
+        container.setTargetFrameRate(60);
         container.setShowFPS(true);
         container.start();
     }
@@ -37,8 +37,8 @@ public class EasyGame extends BasicGame {
         //}
             font = new AngelCodeFont("testdata/demo2.fnt","testdata/demo2_00.tga");
             background = new Image("assets/pics/background.png");
-            player2 = new Player2(1440, 540, new Image("assets/pics/Player1.png"),container.getInput());
-            player1 = new Player1(480,540,new Image("assets/pics/Player2.png"),container.getInput());
+            player1 = new Player1(480,540, new Image("assets/pics/Player1.png"),container.getInput());
+            player2 = new Player2(1440, 540,new Image("assets/pics/Player2.png"),container.getInput());
             music = new Music("testdata/testloop.ogg");
             sound = new Sound("testdata/burp.aif");
             music.loop();
@@ -50,7 +50,7 @@ public class EasyGame extends BasicGame {
         Input input = container.getInput();
 
         if (finished){
-            // Video anzeigen und warten bis fertig
+            // hier animation einfügen!!!
 
             finished =false;
         } else {
@@ -71,8 +71,13 @@ public class EasyGame extends BasicGame {
             player2.update(delta);
             player1.update(delta);
             if (player1.intersects(player2.getShape())){
-                System.out.println("Kollision juhe");
                 finished = true;
+                player1.setX(480);
+                player1.setY(540);
+                player2.setX(1440);
+                player2.setY(540);
+                hitPlayer1 = 0;
+                hitPlayer2 = 0;
             }
         }
 
@@ -83,8 +88,10 @@ public class EasyGame extends BasicGame {
         background.draw();
         player2.draw(g);
         player1.draw(g);
-        font.drawString(8, 25, "Player 1: "+ hitPlayer1, Color.black);
-        font.drawString(8, 50, "Player 2: "+ hitPlayer2, Color.black);
+        font.drawString(795, 25, "Player 1 => "+ hitPlayer1+":"+hitPlayer2+" <= Player 2", Color.black);
+        if (finished){
+           font.drawString(960,540 , "YOU DIED",Color.red);
+        }
     }
 }
 
