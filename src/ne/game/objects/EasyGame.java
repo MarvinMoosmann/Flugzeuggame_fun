@@ -37,7 +37,7 @@ public class EasyGame extends BasicGame {
         //    animation.addFrame(pss.getSprite("flame_" + i + ".png"), 100);
         //}
             font = new AngelCodeFont("testdata/demo2.fnt","testdata/demo2_00.tga");
-            background = new Image("assets/pics/background.png");
+            background = new Image("assets/pics/background.jpg");
             player1 = new Player1(480,540, new Image("assets/pics/Player1.png"),container.getInput());
             player2 = new Player2(1440, 540,new Image("assets/pics/Player2.png"),container.getInput());
             music = new Music("testdata/testloop.ogg");
