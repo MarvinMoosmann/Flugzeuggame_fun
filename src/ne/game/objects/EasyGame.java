@@ -51,7 +51,6 @@ public class EasyGame extends BasicGame {
 
         if (finished){
             // hier animation einfügen!!!
-
             finished =false;
         } else {
 
