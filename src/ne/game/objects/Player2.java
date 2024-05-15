@@ -10,7 +10,7 @@ public class Player2 extends SpielObjekt{
     private Input input;
     private Rectangle shape;
     private int rotation =0;
-    private float acceleration = 0.2f;
+    //private float acceleration = 0.2f;
     public Player2(int x, int y, Image image, Input input) {
         super(x, y, image);
         this.input = input;

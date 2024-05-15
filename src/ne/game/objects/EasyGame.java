@@ -3,9 +3,8 @@ import org.newdawn.slick.*;
 
 public class EasyGame extends BasicGame {
 
-    private Player2 player2;
     private Image background;
-    private Player2 Player2;
+    private Player2 player2;
     private Player1 player1;
     private Sound sound;
     private Music music;
@@ -53,6 +52,7 @@ public class EasyGame extends BasicGame {
 
         if (planecolission){
             //animation + pause hier einfügen
+
             planecolission=false;
         } else {
             if (input.isKeyPressed(Input.KEY_ESCAPE)) {
