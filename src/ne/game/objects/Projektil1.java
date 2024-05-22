@@ -52,7 +52,7 @@ public class Projektil1 extends SpielObjekt{
             }
 
         }
-        if (input.isKeyPressed(Input.KEY_SPACE)) {
+        if (input.isKeyDown(Input.KEY_SPACE)) {
             setRotation(rotation,true,delta);
             shoot=true;
         }
@@ -69,6 +69,7 @@ public class Projektil1 extends SpielObjekt{
     private void setRotation(int rotation,boolean vor, int delta){
         if(shoot){
             speed=delta*shootspeedfactor;
+            shoot = false;
         } else {
             speed=delta/speedfactor;
         }

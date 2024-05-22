@@ -65,13 +65,13 @@ public class EasyGame extends BasicGame {
                 planecolission = false;
                 timer = 0;
             }
-        } if (plane2hit){
+        } else if (plane2hit){
             timer += delta;
             if(timer>=1000) {
                 plane2hit=false;
                 timer=0;
             }
-        } if (plane1hit) {
+        } else if (plane1hit) {
             timer += delta;
             if (timer >= 1000) {
                 plane1hit = false;
