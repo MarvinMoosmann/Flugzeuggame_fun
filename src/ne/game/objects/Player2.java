@@ -10,7 +10,8 @@ public class Player2 extends SpielObjekt{
     private Input input;
     private Rectangle shape;
     private int rotation =0;
-    //private float acceleration = 0.2f;
+    private int speed = 10;
+    private int speedfactor = 2;
     public Player2(int x, int y, Image image, Input input) {
         super(x, y, image);
         this.input = input;
@@ -60,36 +61,37 @@ public class Player2 extends SpielObjekt{
         shape.setCenterY(this.getY());
     }
     private void setRotation(int rotation,boolean vor, int delta){
+        speed=delta/speedfactor;
         int ivor = 1;
         if (!vor) ivor = -1;
         switch(rotation)  {
             case 0:
-                this.setY(this.getY() + delta * ivor);
+                this.setY(this.getY() + speed * ivor);
                 break;
             case 1:
-                this.setY(this.getY() + delta/2 * ivor);
-                this.setX(this.getX() - delta/2 * ivor);
+                this.setY(this.getY() + speed /2 * ivor);
+                this.setX(this.getX() - speed/2 * ivor);
                 break;
             case 2:
-                this.setX(this.getX() - delta*ivor);
+                this.setX(this.getX() - speed*ivor);
                 break;
             case 3:
-                this.setY(this.getY() - delta/2*ivor);
-                this.setX(this.getX() - delta/2*ivor);
+                this.setY(this.getY() - speed/2*ivor);
+                this.setX(this.getX() - speed/2*ivor);
                 break;
             case 4:
-                this.setY(this.getY() - delta*ivor);
+                this.setY(this.getY() - speed*ivor);
                 break;
             case 5:
-                this.setY(this.getY() - delta/2*ivor);
-                this.setX(this.getX() + delta/2*ivor);
+                this.setY(this.getY() - speed/2*ivor);
+                this.setX(this.getX() + speed/2*ivor);
                 break;
             case 6:
-                this.setX(this.getX() + delta*ivor);
+                this.setX(this.getX() + speed*ivor);
                 break;
             case 7:
-                this.setY(this.getY() + delta/2*ivor);
-                this.setX(this.getX() + delta/2*ivor);
+                this.setY(this.getY() + speed/2*ivor);
+                this.setX(this.getX() + speed/2*ivor);
                 break;
         }
         if (this.getY() < 0+this.getHeight()/2) this.setY(0+this.getHeight()/2);
