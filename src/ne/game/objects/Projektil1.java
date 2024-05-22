@@ -5,14 +5,16 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
-public class Player2 extends SpielObjekt{
+public class Projektil1 extends SpielObjekt{
 
     private Input input;
     private Rectangle shape;
-    public int rotation =0;
+    private int rotation =0;
     private int speed = 10;
     private int speedfactor = 2;
-    public Player2(int x, int y, Image image, Input input) {
+    private boolean shoot = false;
+    private int shootspeedfactor = 2;
+    public Projektil1(int x, int y, Image image, Input input) {
         super(x, y, image);
         this.input = input;
         shape = new Rectangle(x,y,image.getWidth(),image.getHeight());
@@ -33,7 +35,7 @@ public class Player2 extends SpielObjekt{
     @Override
     public void update(int delta) {
 
-        if (input.isKeyPressed(Input.KEY_RIGHT)) {
+        if (input.isKeyPressed(Input.KEY_D)) {
             if (rotation<=7) {
                 rotation++;
                 this.getImage().setRotation(this.getImage().getRotation()+45f);
@@ -41,7 +43,7 @@ public class Player2 extends SpielObjekt{
                 rotation = 0;
             }
         }
-        if (input.isKeyPressed(Input.KEY_LEFT)) {
+        if (input.isKeyPressed(Input.KEY_A)) {
             if (rotation>=0) {
                 rotation--;
                 this.getImage().setRotation(this.getImage().getRotation()-45f);
@@ -50,18 +52,26 @@ public class Player2 extends SpielObjekt{
             }
 
         }
-        if (input.isKeyDown(Input.KEY_UP)) {
+        if (input.isKeyPressed(Input.KEY_SPACE)) {
+            setRotation(rotation,true,delta);
+            shoot=true;
+        }
+        if (input.isKeyDown(Input.KEY_W)) {
             setRotation(rotation,true,delta);
         }
 
-        if (input.isKeyDown(Input.KEY_DOWN)) {
+        if (input.isKeyDown(Input.KEY_S)) {
             setRotation(rotation,false,delta);
         }
         shape.setCenterX(this.getX());
         shape.setCenterY(this.getY());
     }
     private void setRotation(int rotation,boolean vor, int delta){
-        speed=delta/speedfactor;
+        if(shoot){
+            speed=delta*shootspeedfactor;
+        } else {
+            speed=delta/speedfactor;
+        }
         int ivor = 1;
         if (!vor) ivor = -1;
         switch(rotation)  {
@@ -69,7 +79,7 @@ public class Player2 extends SpielObjekt{
                 this.setY(this.getY() + speed * ivor);
                 break;
             case 1:
-                this.setY(this.getY() + speed /2 * ivor);
+                this.setY(this.getY() + speed/2 * ivor);
                 this.setX(this.getX() - speed/2 * ivor);
                 break;
             case 2:

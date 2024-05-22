@@ -9,7 +9,7 @@ public class Player1 extends SpielObjekt{
 
     private Input input;
     private Rectangle shape;
-    private int rotation =0;
+    public int rotation =0;
     private int speed = 10;
     private int speedfactor = 2;
     public Player1(int x, int y, Image image, Input input) {

@@ -5,14 +5,14 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
-public class Player2 extends SpielObjekt{
+public class Projektil2 extends SpielObjekt{
 
     private Input input;
     private Rectangle shape;
-    public int rotation =0;
+    private int rotation =0;
     private int speed = 10;
     private int speedfactor = 2;
-    public Player2(int x, int y, Image image, Input input) {
+    public Projektil2(int x, int y, Image image, Input input) {
         super(x, y, image);
         this.input = input;
         shape = new Rectangle(x,y,image.getWidth(),image.getHeight());
@@ -69,7 +69,7 @@ public class Player2 extends SpielObjekt{
                 this.setY(this.getY() + speed * ivor);
                 break;
             case 1:
-                this.setY(this.getY() + speed /2 * ivor);
+                this.setY(this.getY() + speed/2 * ivor);
                 this.setX(this.getX() - speed/2 * ivor);
                 break;
             case 2:
