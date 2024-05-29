@@ -4,8 +4,8 @@ import org.newdawn.slick.*;
 public class EasyGame extends BasicGame {
 
     private Image background;
-    private Player2 player2;
     private Player player1;
+    private Player player2;
     private Projektil projektil1;
     private Projektil projektil2;
     private Sound sound;
@@ -37,18 +37,19 @@ public class EasyGame extends BasicGame {
 
     @Override
     public void init(GameContainer container) throws SlickException {
-        //animation = new Animation();
-        //PackedSpriteSheet pss = new PackedSpriteSheet("res/animation/player1.def");
-        //for (int i=1;i<=11;i++) {
-        //    animation.addFrame(pss.getSprite("flame_" + i + ".png"), 100);
-        //}
+        SpriteSheet sheet = new SpriteSheet("assets/animation/player-animation/Player 1.png", 164/2, 250/2);
+        animation = new Animation();
+        for (int i=0;i<8;i++) {
+            animation.addFrame(sheet.getSprite(i,0), 12);
+        }
+
             font = new AngelCodeFont("testdata/demo2.fnt","testdata/demo2_00.tga");
             background = new Image("assets/pics/background.jpg");
-            projektil1 = new Projektil(-100,-100,new Image("assets/pics/Projektil1.png"),container.getInput());
-            projektil2 =  new Projektil (-100,-100,new Image("assets/pics/Projektil2.png"),container.getInput());
-            player1 = new Player(480,540,new Image("assets/pics/Player1.png"),container.getInput(),projektil1);
-            player2 = new Player2(1440, 540,new Image("assets/pics/Player2.png"),container.getInput());
-              music = new Music("testdata/testloop.ogg");
+            projektil1 = new Projektil(-300,-100,new Image("assets/pics/Projektil1klein.png"),container.getInput());
+            projektil2 = new Projektil (-400,-100,new Image("assets/pics/Projektil2klein.png"),container.getInput());
+            player1 = new PlaneA(480,540,new Image("assets/pics/Player1klein.png"),container.getInput(),projektil1);
+            player2 = new PlaneB(1440, 540,new Image("assets/pics/Player2klein.png"),container.getInput(),projektil2);
+            music = new Music("testdata/testloop.ogg");
             sound = new Sound("testdata/burp.aif");
             music.loop();
 
@@ -57,26 +58,23 @@ public class EasyGame extends BasicGame {
     @Override
     public void update(GameContainer container, int delta) throws SlickException {
         Input input = container.getInput();
-
         if (planecolission){
-            //animation + pause hier einfügen
+            SpriteSheet sheet = new SpriteSheet("assets/animation/crash-animation/crash.png", 164/2, 250/2);
+            animation = new Animation();
+            for (int i=0;i<8;i++) {
+                animation.addFrame(sheet.getSprite(i,0), 12);
+            }
             timer += delta;
             if (timer>=2000) {
                 planecolission = false;
                 timer = 0;
             }
         } else if (plane2hit){
-            timer += delta;
-            if(timer>=1000) {
-                plane2hit=false;
-                timer=0;
-            }
+
+            plane2hit=false;
         } else if (plane1hit) {
-            timer += delta;
-            if (timer >= 1000) {
-                plane1hit = false;
-                timer = 0;
-                }
+            //animation hier einfügen
+            plane1hit = false;
             } else {
                 if (input.isKeyPressed(Input.KEY_ESCAPE)) {
                     container.exit();
@@ -104,27 +102,44 @@ public class EasyGame extends BasicGame {
                     player1.setY(540);
                     player2.setX(1440);
                     player2.setY(540);
-                    projektil1.setX(-100);
+                    projektil1.setX(-300);
                     projektil1.setY(-100);
-                    projektil2.setX(-100);
+                    projektil2.setX(-400);
                     projektil2.setY(-100);
+                    sound.play();
                 }
                 if (projektil1.intersects(player2.getShape())) {
                     plane2hit = true;
                     hitPlayer1++;
-                    projektil1.setX(-100);
+                    player2.setX(1440);
+                    player2.setY(540);
+                    projektil1.setX(-300);
                     projektil1.setY(-100);
-                    projektil2.setX(-100);
+                    projektil2.setX(-400);
                     projektil2.setY(-100);
+                    sound.play();
                     projektil1.setVisible(false);
                 }
                 if (projektil2.intersects(player1.getShape())) {
                     plane1hit = true;
                     hitPlayer2++;
-                    projektil1.setX(-100);
+                    player1.setX(480);
+                    player1.setY(540);
+                    projektil1.setX(-300);
                     projektil1.setY(-100);
-                    projektil2.setX(-100);
+                    projektil2.setX(-400);
                     projektil2.setY(-100);
+                    sound.play();
+                    projektil2.setVisible(false);
+                }
+                if(projektil1.intersects(projektil2.getShape())){
+                    projektil1.setX(-300);
+                    projektil1.setY(-100);
+                    projektil2.setX(-400);
+                    projektil2.setY(-100);
+                    sound.play();
+                    projektil2.setVisible(false);
+                    projektil1.setVisible(false);
                 }
             }
         }
@@ -135,16 +150,11 @@ public class EasyGame extends BasicGame {
         projektil1.draw(g);
         projektil2.draw(g);
         player2.draw(g);
+        animation.draw(player1.getX(), player1.getY());
         player1.draw(g);
-        font.drawString(960, 25, "Player 1 => "+ hitPlayer1+":" + hitPlayer2 + "<= Player 2", Color.black);
+        font.drawString(790, 25, "Player 1 => "+ hitPlayer1+":" + hitPlayer2 + "<= Player 2", Color.red);
         if (planecolission) {
-            font.drawString(960, 540, "YOU DIED", Color.red);
-        }
-        if (plane1hit){
-            font.drawString(960,540,"Player 1 HIT!!!", Color.red);
-        }
-        if (plane2hit) {
-            font.drawString(960,540,"Player 2 HIT!!!", Color.red);
+            font.drawString(900, 540, "YOU DIED", Color.red);
         }
     }
 }
