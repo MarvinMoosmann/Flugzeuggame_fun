@@ -5,9 +5,9 @@ public class EasyGame extends BasicGame {
 
     private Image background;
     private Player2 player2;
-    private Player1 player1;
-    private Projektil1 projektil1;
-    private Projektil2 projektil2;
+    private Player player1;
+    private Projektil projektil1;
+    private Projektil projektil2;
     private Sound sound;
     private Music music;
     private int lautstärke = 0;
@@ -44,11 +44,11 @@ public class EasyGame extends BasicGame {
         //}
             font = new AngelCodeFont("testdata/demo2.fnt","testdata/demo2_00.tga");
             background = new Image("assets/pics/background.jpg");
-            player1 = new Player1(480,540,new Image("assets/pics/Player1.png"),container.getInput());
+            projektil1 = new Projektil(-100,-100,new Image("assets/pics/Projektil1.png"),container.getInput());
+            projektil2 =  new Projektil (-100,-100,new Image("assets/pics/Projektil2.png"),container.getInput());
+            player1 = new Player(480,540,new Image("assets/pics/Player1.png"),container.getInput(),projektil1);
             player2 = new Player2(1440, 540,new Image("assets/pics/Player2.png"),container.getInput());
-            projektil1 = new Projektil1(480,540,new Image("assets/pics/Projektil1.png"),container.getInput());
-            projektil2 =  new Projektil2 (1440,540,new Image("assets/pics/Projektil2.png"),container.getInput());
-            music = new Music("testdata/testloop.ogg");
+              music = new Music("testdata/testloop.ogg");
             sound = new Sound("testdata/burp.aif");
             music.loop();
 
@@ -104,34 +104,27 @@ public class EasyGame extends BasicGame {
                     player1.setY(540);
                     player2.setX(1440);
                     player2.setY(540);
-                    projektil1.setX(480);
-                    projektil1.setY(540);
-                    projektil2.setX(1440);
-                    projektil2.setY(540);
+                    projektil1.setX(-100);
+                    projektil1.setY(-100);
+                    projektil2.setX(-100);
+                    projektil2.setY(-100);
                 }
                 if (projektil1.intersects(player2.getShape())) {
                     plane2hit = true;
                     hitPlayer1++;
-                    player1.setX(480);
-                    player1.setY(540);
-                    player2.setX(1440);
-                    player2.setY(540);
-                    projektil1.setX(480);
-                    projektil1.setY(540);
-                    projektil2.setX(1440);
-                    projektil2.setY(540);
+                    projektil1.setX(-100);
+                    projektil1.setY(-100);
+                    projektil2.setX(-100);
+                    projektil2.setY(-100);
+                    projektil1.setVisible(false);
                 }
                 if (projektil2.intersects(player1.getShape())) {
                     plane1hit = true;
                     hitPlayer2++;
-                    player1.setX(480);
-                    player1.setY(540);
-                    player2.setX(1440);
-                    player2.setY(540);
-                    projektil1.setX(480);
-                    projektil1.setY(540);
-                    projektil2.setX(1440);
-                    projektil2.setY(540);
+                    projektil1.setX(-100);
+                    projektil1.setY(-100);
+                    projektil2.setX(-100);
+                    projektil2.setY(-100);
                 }
             }
         }

@@ -5,35 +5,35 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
-public class Projektil2 extends SpielObjekt{
+public class Player extends SpielObjekt{
 
     private Input input;
     private Rectangle shape;
-    private int rotation =0;
-    private int speed = 10;
+    public int rotation =0;
+    private int speed = 0;
     private int speedfactor = 2;
-    public Projektil2(int x, int y, Image image, Input input) {
+
+    private Projektil projektil;
+    public Player(int x, int y, Image image, Input input, Projektil projektil) {
         super(x, y, image);
         this.input = input;
         shape = new Rectangle(x,y,image.getWidth(),image.getHeight());
+        this.projektil = projektil;
     }
 
     @Override
     public void draw(Graphics g) {
         this.getImage().drawCentered(this.getX(),this.getY());
-
     }
     @Override
     public Shape getShape() {
         return shape;
     }
 
-
-
     @Override
     public void update(int delta) {
-
-        if (input.isKeyPressed(Input.KEY_RIGHT)) {
+        boolean vor = false;
+        if (input.isKeyPressed(Input.KEY_D)) {
             if (rotation<=7) {
                 rotation++;
                 this.getImage().setRotation(this.getImage().getRotation()+45f);
@@ -41,7 +41,7 @@ public class Projektil2 extends SpielObjekt{
                 rotation = 0;
             }
         }
-        if (input.isKeyPressed(Input.KEY_LEFT)) {
+        if (input.isKeyPressed(Input.KEY_A)) {
             if (rotation>=0) {
                 rotation--;
                 this.getImage().setRotation(this.getImage().getRotation()-45f);
@@ -50,12 +50,22 @@ public class Projektil2 extends SpielObjekt{
             }
 
         }
-        if (input.isKeyDown(Input.KEY_UP)) {
+        if (input.isKeyDown(Input.KEY_W)) {
+            vor = true;
             setRotation(rotation,true,delta);
         }
 
-        if (input.isKeyDown(Input.KEY_DOWN)) {
+        if (input.isKeyDown(Input.KEY_S)) {
+            vor = false;
             setRotation(rotation,false,delta);
+        }
+
+        if (input.isKeyPressed(Input.KEY_SPACE) && !projektil.isVisible()) {
+            projektil.setVisible(true);
+            projektil.setVor(!vor);
+            projektil.setRotation(rotation);
+            projektil.setX(getX());
+            projektil.setY(getY());
         }
         shape.setCenterX(this.getX());
         shape.setCenterY(this.getY());
@@ -66,11 +76,11 @@ public class Projektil2 extends SpielObjekt{
         if (!vor) ivor = -1;
         switch(rotation)  {
             case 0:
-                this.setY(this.getY() + speed * ivor);
+                this.setY(this.getY() + speed*ivor);
                 break;
             case 1:
-                this.setY(this.getY() + speed/2 * ivor);
-                this.setX(this.getX() - speed/2 * ivor);
+                this.setY(this.getY() + speed/2*ivor);
+                this.setX(this.getX() - speed/2*ivor);
                 break;
             case 2:
                 this.setX(this.getX() - speed*ivor);
