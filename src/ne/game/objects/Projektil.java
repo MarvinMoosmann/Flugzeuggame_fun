@@ -11,7 +11,7 @@ public class Projektil extends SpielObjekt{
     private Rectangle shape;
     private int rotation =0;
     private int speed = 0;
-    private int shootspeedfactor = 1;
+    private int shootspeedfactor = 2;
     private boolean vor = false;
     private boolean visible = false;
     public Projektil(int x, int y, Image image, Input input) {
