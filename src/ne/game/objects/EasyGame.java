@@ -14,8 +14,8 @@ public class EasyGame extends BasicGame {
     private int hitPlayer1 = 0;
     private int hitPlayer2 = 0;
     private AngelCodeFont font;
-    private Animation animation;
-    private Animation limited;
+    private Animation animation1;
+    private Animation animation2;
     private boolean planecolission = false;
     private boolean plane1hit = false;
     private boolean plane2hit = false;
@@ -39,13 +39,13 @@ public class EasyGame extends BasicGame {
     @Override
     public void init(GameContainer container) throws SlickException {
         SpriteSheet sheet = new SpriteSheet("assets/animation/player-animation/Player 1.png", 164/2, 250/2);
-        animation = new Animation();
+        animation1 = new Animation();
         for (int i=0;i<8;i++) {
-            animation.addFrame(sheet.getSprite(i,0), 12);
+            animation1.addFrame(sheet.getSprite(i,0), 12);
         }
-        limited = new Animation();
+        animation2 = new Animation();
         for (int i=0;i<8;i++) {
-            limited.addFrame(sheet.getSprite(i,0), 12);
+            animation2.addFrame(sheet.getSprite(i,0), 12);
         }
 
             font = new AngelCodeFont("testdata/demo2.fnt","testdata/demo2_00.tga");
@@ -65,22 +65,74 @@ public class EasyGame extends BasicGame {
         Input input = container.getInput();
         if (planecolission){
             SpriteSheet sheet = new SpriteSheet("assets/animation/crash-animation/crash.png", 164/2, 250/2);
-            animation = new Animation();
+            animation1 = new Animation();
             for (int i=0;i<8;i++) {
-                animation.addFrame(sheet.getSprite(i,0), 12);
+                animation1.addFrame(sheet.getSprite(i,0), 12);
+            }
+
+            animation2 = new Animation();
+            for (int i=0;i<8;i++) {
+                animation2.addFrame(sheet.getSprite(i,0), 12);
             }
             timer += delta;
             if (timer>=2000) {
                 planecolission = false;
                 timer = 0;
+                sheet = new SpriteSheet("assets/animation/player-animation/Player 1.png", 164 / 2, 250 / 2);
+                animation1 = new Animation();
+                for (int i=0;i<8;i++) {
+                    animation1.addFrame(sheet.getSprite(i,0), 12);
+                }
+                animation2 = new Animation();
+                for (int i=0;i<8;i++) {
+                    animation2.addFrame(sheet.getSprite(i,0), 12);
+                }
             }
-        } else if (plane2hit){
+        }
 
-            plane2hit=false;
-        } else if (plane1hit) {
-            //animation hier einfügen
-            plane1hit = false;
-            } else {
+
+        else if (plane2hit){
+            SpriteSheet sheet = new SpriteSheet("assets/animation/crash-animation/crash.png", 164/2, 250/2);
+
+            animation2 = new Animation();
+            for (int i=0;i<8;i++) {
+                animation2.addFrame(sheet.getSprite(i,0), 12);
+            }
+            timer += delta;
+            if (timer>=100) {
+                plane2hit = false;
+                timer = 0;
+                sheet = new SpriteSheet("assets/animation/player-animation/Player 1.png", 164 / 2, 250 / 2);
+
+                animation2 = new Animation();
+                for (int i=0;i<8;i++) {
+                    animation2.addFrame(sheet.getSprite(i,0), 12);
+                }
+            }
+        }
+
+
+        else if (plane1hit) {
+            SpriteSheet sheet = new SpriteSheet("assets/animation/crash-animation/crash.png", 164/2, 250/2);
+            animation1 = new Animation();
+            for (int i=0;i<8;i++) {
+                animation1.addFrame(sheet.getSprite(i,0), 12);
+            }
+            timer += delta;
+            if (timer>=100) {
+                plane1hit = false;
+                timer = 0;
+                sheet = new SpriteSheet("assets/animation/player-animation/Player 1.png", 164 / 2, 250 / 2);
+                animation1 = new Animation();
+                for (int i=0;i<8;i++) {
+                    animation1.addFrame(sheet.getSprite(i,0), 12);
+                }
+
+            }
+        }
+
+
+        else {
                 if (input.isKeyPressed(Input.KEY_ESCAPE)) {
                     container.exit();
                 }
@@ -154,9 +206,9 @@ public class EasyGame extends BasicGame {
         background.draw();
         projektil1.draw(g);
         projektil2.draw(g);
-        limited.draw(player2.getX(), player2.getY());
+        animation2.draw(player2.getX(), player2.getY());
         player2.draw(g);
-        animation.draw(player1.getX(), player1.getY());
+        animation1.draw(player1.getX(), player1.getY());
         player1.draw(g);
         font.drawString(790, 25, "Player 1 => "+ hitPlayer1+":" + hitPlayer2 + "<= Player 2", Color.red);
         if (planecolission) {
