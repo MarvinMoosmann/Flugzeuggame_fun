@@ -15,6 +15,7 @@ public class EasyGame extends BasicGame {
     private int hitPlayer2 = 0;
     private AngelCodeFont font;
     private Animation animation;
+    private Animation limited;
     private boolean planecolission = false;
     private boolean plane1hit = false;
     private boolean plane2hit = false;
@@ -41,6 +42,10 @@ public class EasyGame extends BasicGame {
         animation = new Animation();
         for (int i=0;i<8;i++) {
             animation.addFrame(sheet.getSprite(i,0), 12);
+        }
+        limited = new Animation();
+        for (int i=0;i<8;i++) {
+            limited.addFrame(sheet.getSprite(i,0), 12);
         }
 
             font = new AngelCodeFont("testdata/demo2.fnt","testdata/demo2_00.tga");
@@ -149,6 +154,7 @@ public class EasyGame extends BasicGame {
         background.draw();
         projektil1.draw(g);
         projektil2.draw(g);
+        limited.draw(player2.getX(), player2.getY());
         player2.draw(g);
         animation.draw(player1.getX(), player1.getY());
         player1.draw(g);
