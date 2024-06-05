@@ -11,7 +11,7 @@ public class Player extends SpielObjekt{
     private Rectangle shape;
     public int rotation =0;
     private int speed = 0;
-    private int speedfactor = 3;
+    private int speedfactor = 4;
     public Projektil projektil;
     public Player(int x, int y, Image image, Input input, Projektil projektil) {
         super(x, y, image);
@@ -31,7 +31,6 @@ public class Player extends SpielObjekt{
 
     @Override
     public void update(int delta) {
-
         shape.setCenterX(this.getX());
         shape.setCenterY(this.getY());
     }
@@ -44,29 +43,29 @@ public class Player extends SpielObjekt{
                 this.setY(this.getY() + speed*ivor);
                 break;
             case 1:
-                this.setY(this.getY() + speed/2*ivor);
-                this.setX(this.getX() - speed/2*ivor);
+                this.setY(this.getY() + speed*2/3*ivor);
+                this.setX(this.getX() - speed*2/3*ivor);
                 break;
             case 2:
                 this.setX(this.getX() - speed*ivor);
                 break;
             case 3:
-                this.setY(this.getY() - speed/2*ivor);
-                this.setX(this.getX() - speed/2*ivor);
+                this.setY(this.getY() - speed+2/3*ivor);
+                this.setX(this.getX() - speed*2/3*ivor);
                 break;
             case 4:
                 this.setY(this.getY() - speed*ivor);
                 break;
             case 5:
-                this.setY(this.getY() - speed/2*ivor);
-                this.setX(this.getX() + speed/2*ivor);
+                this.setY(this.getY() - speed*2/3*ivor);
+                this.setX(this.getX() + speed*2/3*ivor);
                 break;
             case 6:
                 this.setX(this.getX() + speed*ivor);
                 break;
             case 7:
-                this.setY(this.getY() + speed/2*ivor);
-                this.setX(this.getX() + speed/2*ivor);
+                this.setY(this.getY() + speed*2/3*ivor);
+                this.setX(this.getX() + speed*2/3*ivor);
                 break;
         }
         if (this.getY() < 0+this.getHeight()/2) this.setY(0+this.getHeight()/2);

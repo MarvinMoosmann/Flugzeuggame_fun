@@ -12,21 +12,18 @@ public class PlaneB extends Player{
     public void update(int delta) {
         boolean vor = false;
         if (input.isKeyPressed(Input.KEY_RIGHT)) {
-            if (rotation<=7) {
-                rotation++;
-                this.getImage().setRotation(this.getImage().getRotation()+45f);
-            } else {
+            rotation++;
+            this.getImage().setRotation(this.getImage().getRotation()+45f);
+            if (rotation==8) {
                 rotation = 0;
             }
         }
         if (input.isKeyPressed(Input.KEY_LEFT)) {
-            if (rotation>=0) {
-                rotation--;
-                this.getImage().setRotation(this.getImage().getRotation()-45f);
-            } else {
+            rotation--;
+            this.getImage().setRotation(this.getImage().getRotation()-45f);
+            if (rotation<0) {
                 rotation = 7;
             }
-
         }
         if (input.isKeyDown(Input.KEY_UP)) {
             vor = true;

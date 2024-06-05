@@ -3,6 +3,7 @@ package ne.game.objects;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 
+
 public class PlaneA extends Player{
     public PlaneA(int x, int y, Image image, Input input, Projektil projektil) {
         super(x, y, image, input, projektil);
@@ -12,18 +13,16 @@ public class PlaneA extends Player{
     public void update(int delta) {
         boolean vor = false;
         if (input.isKeyPressed(Input.KEY_D)) {
-            if (rotation<=7) {
-                rotation++;
-                this.getImage().setRotation(this.getImage().getRotation()+45f);
-            } else {
+            rotation++;
+            this.getImage().setRotation(this.getImage().getRotation()+45f);
+            if (rotation==8) {
                 rotation = 0;
             }
         }
         if (input.isKeyPressed(Input.KEY_A)) {
-            if (rotation>=0) {
-                rotation--;
-                this.getImage().setRotation(this.getImage().getRotation()-45f);
-            } else {
+            rotation--;
+            this.getImage().setRotation(this.getImage().getRotation()-45f);
+            if (rotation<0) {
                 rotation = 7;
             }
         }

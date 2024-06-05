@@ -8,9 +8,11 @@ public class EasyGame extends BasicGame {
     private Player player2;
     private Projektil projektil1;
     private Projektil projektil2;
-    private Sound sound;
-    private Music music;
-    private int lautstärke = 0;
+    private Music backgroundmusic;
+    private Sound explosion;
+    private Sound jetengine;
+    private Sound shot;
+    private int lautstärke = 10;
     private int hitPlayer1 = 0;
     private int hitPlayer2 = 0;
     private AngelCodeFont font;
@@ -19,7 +21,6 @@ public class EasyGame extends BasicGame {
     private boolean planecolission = false;
     private boolean plane1hit = false;
     private boolean plane2hit = false;
-
     private int timer =0;
 
     public EasyGame() {
@@ -54,9 +55,12 @@ public class EasyGame extends BasicGame {
             projektil2 = new Projektil (-400,-100,new Image("assets/pics/Projektil2klein.png"),container.getInput());
             player1 = new PlaneA(480,540,new Image("assets/pics/Player1klein.png"),container.getInput(),projektil1);
             player2 = new PlaneB(1440, 540,new Image("assets/pics/Player2klein.png"),container.getInput(),projektil2);
-            music = new Music("testdata/testloop.ogg");
-            sound = new Sound("testdata/burp.aif");
-            music.loop();
+            backgroundmusic = new Music("assets/sounds/Backgroundmusic2.wav");
+            explosion = new Sound("assets/sounds/crash.wav");
+            jetengine = new Sound("assets/sounds/jetengine3.wav");
+            shot = new Sound("assets/sounds/shot.wav");
+            backgroundmusic.loop();
+            jetengine.loop();
 
         }
 
@@ -136,15 +140,15 @@ public class EasyGame extends BasicGame {
                 if (input.isKeyPressed(Input.KEY_ESCAPE)) {
                     container.exit();
                 }
-                if (input.isKeyPressed(Input.KEY_1)) {
+                if (input.isKeyPressed(Input.KEY_2)) {
                     lautstärke = lautstärke + 1;
                     if (lautstärke >= 10) lautstärke = 10;
-                    music.setVolume(lautstärke / 10f);
+                    backgroundmusic.setVolume(lautstärke / 10f);
                 }
-                if (input.isKeyPressed(Input.KEY_2)) {
+                if (input.isKeyPressed(Input.KEY_1)) {
                     lautstärke = lautstärke - 1;
                     if (lautstärke < 1) lautstärke = 0;
-                    music.setVolume(lautstärke / 10f);
+                    backgroundmusic.setVolume(lautstärke / 10f);
                 }
                 player2.update(delta);
                 player1.update(delta);
@@ -163,7 +167,7 @@ public class EasyGame extends BasicGame {
                     projektil1.setY(-100);
                     projektil2.setX(-400);
                     projektil2.setY(-100);
-                    sound.play();
+                    explosion.play();
                 }
                 if (projektil1.intersects(player2.getShape())) {
                     plane2hit = true;
@@ -174,7 +178,7 @@ public class EasyGame extends BasicGame {
                     projektil1.setY(-100);
                     projektil2.setX(-400);
                     projektil2.setY(-100);
-                    sound.play();
+                    explosion.play();
                     projektil1.setVisible(false);
                 }
                 if (projektil2.intersects(player1.getShape())) {
@@ -186,7 +190,7 @@ public class EasyGame extends BasicGame {
                     projektil1.setY(-100);
                     projektil2.setX(-400);
                     projektil2.setY(-100);
-                    sound.play();
+                    explosion.play();
                     projektil2.setVisible(false);
                 }
                 if(projektil1.intersects(projektil2.getShape())){
@@ -194,7 +198,7 @@ public class EasyGame extends BasicGame {
                     projektil1.setY(-100);
                     projektil2.setX(-400);
                     projektil2.setY(-100);
-                    sound.play();
+                    explosion.play();
                     projektil2.setVisible(false);
                     projektil1.setVisible(false);
                 }
