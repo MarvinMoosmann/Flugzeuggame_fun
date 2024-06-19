@@ -11,7 +11,7 @@ public class EasyGame extends BasicGame {
     private Music backgroundmusic;
     private Sound explosion;
     private Sound jetengine;
-    private Sound shot;
+    private Sound shotis;
     private int lautstärke = 10;
     private int hitPlayer1 = 0;
     private int hitPlayer2 = 0;
