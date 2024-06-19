@@ -1,7 +1,5 @@
 package ne.game.objects;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
+import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
@@ -14,15 +12,19 @@ public class Projektil extends SpielObjekt{
     private int shootspeedfactor = 2;
     private boolean vor = false;
     private boolean visible = false;
-    public Projektil(int x, int y, Image image, Input input) {
+    private Sound shot;
+    public Projektil(int x, int y, Image image, Input input) throws SlickException {
         super(x, y, image);
         shape = new Rectangle(x,y,image.getWidth(),image.getHeight());
+        shot = new Sound("assets/sounds/shot.wav");
     }
 
     @Override
     public void draw(Graphics g) {
-        if (visible) this.getImage().drawCentered(this.getX(),this.getY());
-
+        if (visible) {
+            this.getImage().drawCentered(this.getX(), this.getY());
+            shot.play();
+        }
     }
     @Override
     public Shape getShape() {
