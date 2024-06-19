@@ -58,7 +58,7 @@ public class EasyGame extends BasicGame {
             backgroundmusic = new Music("assets/sounds/Backgroundmusic2.wav");
             explosion = new Sound("assets/sounds/crash.wav");
             jetengine = new Sound("assets/sounds/jetengine3.wav");
-            shot = new Sound("assets/sounds/shot.wav");
+            shotis = new Sound("assets/sounds/shot.wav");
             backgroundmusic.loop();
             jetengine.loop();
 
